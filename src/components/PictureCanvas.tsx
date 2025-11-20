@@ -4,7 +4,6 @@ import type { Picture, PixelUpdate } from "../types";
 interface PictureCanvasProps {
   picture: Picture;
   scale: number; // Tamanho de cada quadrado (ex: 20px)
-  // Vamos deixar o onDraw preparado para o futuro, mas opcional por enquanto
   onDraw?: (pixel: PixelUpdate) => void;
 }
 
@@ -36,12 +35,35 @@ export const PictureCanvas = ({
     }
   }, [picture, scale]); // Array de dependências: roda se picture ou scale mudar
 
+  // NOVA FUNÇÃO: Captura o clique
+  const handlePointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    // 1. Se não tiver função de desenhar passada pelo pai, não faz nada
+    if (!onDraw) return;
+
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    // 2. Pega a posição do retângulo do canvas na tela
+    const rect = canvas.getBoundingClientRect();
+
+    // 3. Matemática para achar o X e Y relativos ao canvas
+    // e.clientX é onde o mouse está na tela inteira
+    // rect.left é onde o canvas começa
+    const x = Math.floor((e.clientX - rect.left) / scale);
+    const y = Math.floor((e.clientY - rect.top) / scale);
+
+    // 4. Chama a função do pai mandando pintar esse pixel
+    // Por enquanto vamos fixar a cor PRETA (#000000) para testar
+    onDraw({ x, y, color: "#000000" });
+  };
+
   return (
     <canvas
       ref={canvasRef}
+      onPointerDown={handlePointerDown} // <--- Ligando o evento aqui
       width={picture.width * scale}
       height={picture.height * scale}
-      style={{ border: "1px solid #ccc" }} // Só para ver onde ele está
+      style={{ border: "1px solid #ccc", touchAction: "none" }} // touchAction evita scroll no celular ao desenhar
     />
   );
 };
