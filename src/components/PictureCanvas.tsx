@@ -57,13 +57,55 @@ export const PictureCanvas = ({
     onDraw({ x, y, color: "#000000" });
   };
 
+  // NOVA FUNÇÃO: O Hack do Link Fantasma
+  const handleDownload = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    // 1. Converte o canvas para uma URL de imagem (Base64)
+    const imageURL = canvas.toDataURL("image/png");
+
+    // 2. Cria um link <a> temporário na memória
+    const link = document.createElement("a");
+    link.href = imageURL;
+    link.download = "minha-pixel-art.png"; // Nome do arquivo
+
+    // 3. "Clica" no link programaticamente
+    link.click();
+  };
+
   return (
-    <canvas
-      ref={canvasRef}
-      onPointerDown={handlePointerDown} // <--- Ligando o evento aqui
-      width={picture.width * scale}
-      height={picture.height * scale}
-      style={{ border: "1px solid #ccc", touchAction: "none" }} // touchAction evita scroll no celular ao desenhar
-    />
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "10px",
+      }}
+    >
+      <canvas
+        ref={canvasRef}
+        onPointerDown={handlePointerDown} // <--- Ligando o evento aqui
+        width={picture.width * scale}
+        height={picture.height * scale}
+        style={{ border: "1px solid #ccc", touchAction: "none" }} // touchAction evita scroll no celular ao desenhar
+      />
+
+      {/* Botão de Salvar */}
+      <button
+        onClick={handleDownload}
+        style={{
+          padding: "10px 20px",
+          background: "#4CAF50", // Verde bonito
+          color: "white",
+          border: "none",
+          borderRadius: "6px",
+          cursor: "pointer",
+          fontWeight: "bold",
+        }}
+      >
+        💾 Salvar Arte
+      </button>
+    </div>
   );
 };
