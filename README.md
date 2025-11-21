@@ -1,73 +1,106 @@
-# React + TypeScript + Vite
+# 🎨 Pixel Art Pro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![License](https://img.shields.io/badge/license-MIT-green)
+![React](https://img.shields.io/badge/React-18-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![Vite](https://img.shields.io/badge/Build-Vite-purple)
 
-Currently, two official plugins are available:
+> **Uma implementação moderna e tipada do clássico "Pixel Art Editor" do livro Eloquent JavaScript.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este projeto é o código-fonte final desenvolvido no livro/guia **"Pixel Art Pro: Dominando a Lógica do JavaScript"**. O objetivo é demonstrar como pegar a lógica complexa de manipulação de bits e arrays e aplicá-la em uma arquitetura moderna com **React Hooks** e **TypeScript**.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📸 Demonstração
 
-## Expanding the ESLint configuration
+![Captura de Tela](./public/screenshot.png)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ✨ Funcionalidades (Features)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+O projeto vai muito além de um simples canvas. Ele implementa um editor gráfico funcional:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **🖌️ Pincel Dinâmico:** Desenhe pixels livremente em uma grade matemática.
+- **🧼 Borracha Inteligente:** Ferramenta dedicada para remover pixels (resetar para a cor de fundo).
+- **🎨 Seletor de Cores Híbrido:**
+  - **Paleta Rápida:** Acesso instantâneo a cores comuns.
+  - **Color Picker Nativo:** Escolha qualquer cor do espectro Hexadecimal.
+- **💾 Exportação de Arte:** Converta sua matriz de dados em um arquivo de imagem **PNG** real e baixe para sua máquina.
+- **📐 Grade Responsiva:** Lógica baseada em vetores matemáticos, escalável para qualquer tamanho de tela.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+Este projeto foi modernizado para refletir o mercado de trabalho de 2025:
+
+- **[React](https://reactjs.org/)**: Para construção da UI baseada em componentes.
+- **[TypeScript](https://www.typescriptlang.org/)**: Para tipagem estrita das estruturas de dados (`Picture`, `PixelUpdate`).
+- **[Vite](https://vitejs.dev/)**: Para um ambiente de desenvolvimento ultra-rápido.
+- **HTML5 Canvas API**: Para renderização gráfica de alta performance (GPU).
+- **CSS Modules / Inline**: Para estilização ágil e focada.
+
+---
+
+## 🚀 Como Rodar Localmente
+
+Siga os passos abaixo para ter o editor rodando na sua máquina:
+
+1.  **Clone o repositório:**
+
+    ```bash
+    git clone https://github.com/gothd/pixel-art-pro.git
+    ```
+
+2.  **Entre na pasta:**
+
+    ```bash
+    cd pixel-art-pro
+    ```
+
+3.  **Instale as dependências:**
+
+    ```bash
+    npm install
+    ```
+
+4.  **Rode o servidor de desenvolvimento:**
+
+    ```bash
+    npm run dev
+    ```
+
+5.  **Acesse no navegador:**
+    Geralmente em `http://localhost:5173`
+
+---
+
+## 📂 Estrutura do Projeto (Didática)
+
+Para ajudar nos seus estudos, o código está organizado da seguinte forma:
+
+```text
+src/
+├── components/
+│   ├── PictureCanvas.tsx  # O "motor" visual (useRef + useEffect)
+│   ├── ColorPicker.tsx    # Lógica de seleção de cores
+│   └── ...
+├── types.ts               # O "DNA" (Interfaces Picture, Pixel, etc)
+├── App.tsx                # O "cérebro" (Gerenciamento de Estado Global)
+└── main.tsx               # Ponto de entrada
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📚 Créditos e Inspiração
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+A lógica core deste projeto (Array Plano para manipulação de pixels) foi inspirada no Capítulo 19 do livro **[Eloquent JavaScript](https://eloquentjavascript.net/)** de Marijn Haverbeke.
+
+A refatoração para React + TypeScript foi desenvolvida como parte do material educacional de **Ruan Oliveira Sena**.
+
+---
+
+## 📝 Licença
+
+Este projeto está sob a licença **MIT**. Sinta-se livre para usar, modificar e aprender com ele.
