@@ -8,7 +8,7 @@ type ToolType = "brush" | "eraser";
 
 function App() {
   const [picture, setPicture] = useState<Picture>(
-    emptyPicture(10, 10, "#f0f0f0") // Estado inicial: Imagem 10x10 cinza
+    emptyPicture(20, 30, "#f0f0f0") // Estado inicial: Imagem 10x10 cinza
   );
   // Cor selecionada (começa com preto)
   const [selectedColor, setSelectedColor] = useState("#000000");
@@ -43,7 +43,7 @@ function App() {
   return (
     <div style={{ padding: "20px", display: "flex", justifyContent: "center" }}>
       <div style={{ textAlign: "center" }}>
-        <h1>Pixel Art Editor</h1>
+        <h1>Pixel Art Pro</h1>
 
         <ColorPicker color={selectedColor} onChange={setSelectedColor} />
 
@@ -80,7 +80,7 @@ function App() {
 
         <PictureCanvas
           picture={picture}
-          scale={40} // Cada pixel terá 40x40px na tela
+          scale={20} // Cada pixel terá 20x20px na tela
           onDraw={handleDraw} // Passamos a função
         />
       </div>
